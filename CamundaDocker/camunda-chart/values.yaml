@@ -1,0 +1,31 @@
+image:
+  repository: <your-docker-repo>/camunda-with-secrets
+  tag: <your-tag>
+  pullPolicy: IfNotPresent
+
+azureKeyVault:
+  clientId: "<your-client-id>"
+  clientSecret: "<your-client-secret>"
+  tenantId: "<your-tenant-id>"
+  keyVaultName: "<your-key-vault-name>"
+
+#For hashi corp vault
+#vault: 
+ # url: "https://vault.example.com"
+ # roleId: "<your-approle-role-id>"
+ # secretId: "<your-approle-secret-id>"
+ # dbPath: "secret/data/db"
+ # ldapPath: "secret/data/ldap"
+
+
+ingress:
+  enabled: true
+  hostname: "rpa.dev.azure.com"
+  tlsEnabled: true                  # Flag to enable/disable TLS
+  tlsSecretName: "camunda-tls-secret"  # Parameterized TLS secret name
+
+# TLS Certificate and Key Base64 encoded (provide encoded values here)
+tls:
+  createSecret: true                # Control whether the secret is created
+  cert: "<base64-encoded-certificate>"  # Example: base64 -w 0 <path/to/cert.crt>
+  key: "<base64-encoded-key>"           # Example: base64 -w 0 <path/to/key.key>
