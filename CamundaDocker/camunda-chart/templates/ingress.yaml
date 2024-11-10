@@ -16,11 +16,18 @@ spec:
     - host: {{ .Values.ingress.hostname }}
       http:
         paths:
-          - path: /
+          - path: /camunda
             pathType: Prefix
             backend:
               service:
                 name: camunda
                 port:
-                  number: 8080
+                  number: 8080  # Default Camunda Tomcat port
+          - path: /engine-rest
+            pathType: Prefix
+            backend:
+              service:
+                name: camunda
+                port:
+                  number: 8080  # Same port for Camunda engine-rest
 {{- end }}
